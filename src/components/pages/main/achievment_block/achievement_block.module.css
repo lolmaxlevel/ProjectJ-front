@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Gothic&display=swap');
+.main {
+  justify-content: center;
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 100px;
+  background-color: #000000;
+  align-content: center;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 809px) {
+  .main {
+    padding: 60px 20px;
+  }
+}
+
+.title {
+  width: 500px;
+  flex: 1 1 45%;
+  height: auto; /* 57px */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow: visible;
+  position: relative;
+  font-weight: 400;
+  font-style: normal;
+  font-family: "League Gothic", "League Gothic Placeholder", sans-serif;
+  color: #ffbf81;
+  font-size: 48px;
+  letter-spacing: 0;
+  line-height: 1.2;
+}
+@media (max-width: 940px) {
+  .title {
+    font-size: 32px;
+  }
+}
+
+
+.text {
+  width: 500px;
+  flex: 1 1 45%;
+  height: auto; /* 180px */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow: visible;
+  position: relative;
+  font-weight: 400;
+  font-style: normal;
+  font-family: "Schibsted Grotesk", "Schibsted Grotesk Placeholder", sans-serif;
+  color: #ffffff;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.columns {
+  align-self: center;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+  position: relative;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  gap: 40px;
+}

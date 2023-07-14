@@ -1,0 +1,27 @@
+.question {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-weight: 700;
+  font-style: normal;
+  font-family: "Schibsted Grotesk", "Schibsted Grotesk Placeholder", sans-serif;
+  color: #ffffff;
+  font-size: 30px;
+  letter-spacing: -0.005em;
+  line-height: 1.5;
+}
+
+.answer {
+  padding-bottom: 60px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+  max-width: 350px;
+  font-weight: 400;
+  font-style: normal;
+  font-family: "Schibsted Grotesk", "Schibsted Grotesk Placeholder", sans-serif;
+  color: #ffdc5e;
+  font-size: 25px;
+  letter-spacing: 0;
+  line-height: 1.5;
+}

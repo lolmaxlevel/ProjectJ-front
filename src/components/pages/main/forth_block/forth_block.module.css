@@ -1,0 +1,112 @@
+.main {
+    align-items: center;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 100%;
+  height: min-content; /* 826px */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 100px 100px 100px;
+  background-color: #ffffff;
+  overflow: hidden;
+  position: relative;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 60px;
+}
+@media (max-width: 998px) {
+    .main {
+      padding: 100px 15px 100px 15px;
+    }
+}
+.cardGrid {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.card {
+  height: min-content; /* 626px */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  position: relative;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 30px;
+}
+
+.cardContent {
+  height: min-content; /* 106px */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 1 0 0;
+  align-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+
+.cardImage {
+  max-width: 490px;
+    width: min(100vw - 750px, 690px);
+    min-width: 355px;
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+  mix-blend-mode: luminosity;
+  flex: 1 0 0;
+  aspect-ratio: 1 / 1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 40px;
+}
+@media (max-width: 940px) {
+    .cardImage{
+        width: min(100vw - 60px, 490px);
+        min-width: 0;
+    }
+
+}
+.cardTitle {
+  height: auto; /* 48px */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow: visible;
+  flex: 1 0 0;
+  position: relative;
+  font-weight: 400;
+  font-style: normal;
+  font-family: "League Gothic", "League Gothic Placeholder", sans-serif;
+  color: #000000;
+  font-size: 35px;
+  letter-spacing: 0;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.cardText {
+  height: auto; /* 48px */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+  max-width: 300px;
+  flex: 1 0 0;
+  font-weight: 400;
+  font-style: normal;
+  font-family: "Schibsted Grotesk", "Schibsted Grotesk Placeholder", sans-serif;
+  color: #000000;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 1.5;
+  text-align: left;
+}

@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Gothic&display=swap');
+.social {
+  box-sizing: border-box;
+  display: flex;
+  padding-bottom: 10px;
+  overflow: hidden;
+  position: relative;
+  align-content: center;
+  gap: 15px;
+  width: 1000px;
+  border-color: #ff5759;
+  border-style: solid;
+  border-top-width: 0;
+  border-bottom-width: 1px;
+  border-left-width: 0;
+  border-right-width: 0;
+}
+.text {
+  white-space: pre;
+  font-weight: 700;
+  font-style: normal;
+  font-family: "Schibsted Grotesk", "Schibsted Grotesk Placeholder", sans-serif;
+  color: #000000;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+.icon {
+  width: 34px;
+  height: 34px;
+}

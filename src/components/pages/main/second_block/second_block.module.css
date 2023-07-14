@@ -1,0 +1,132 @@
+.text {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 100%;
+  height: min-content; /* 886px */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 100px 100px 100px 100px;
+  background-color: #ffffff;
+  overflow: hidden;
+  position: relative;
+  align-content: center;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 768px) {
+  .text {
+    padding: 25px;
+  }
+}
+
+.content {
+  width: 100%;
+  height: min-content; /* 686px */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 1000px;
+  overflow: hidden;
+  position: relative;
+  align-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+.left {
+  flex-shrink: 0;
+  width: min-content; /* 262px */
+  height: min-content; /* 262px */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: visible;
+  position: relative;
+  align-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-right: 50px;
+}
+
+.image {
+  max-width: 262px;
+  min-width: 80px;
+  width: 22vw;
+  display: block;
+  overflow: visible;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background-image: url(/pic.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 153px;
+}
+
+@media (max-width: 768px) {
+  .image {
+    width: 0;
+  }
+}
+.computer{
+  width: 115px;
+  position: absolute;
+  top: -11px;
+  left: 618px;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+  position: relative;
+  padding: 0;
+  align-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 40px;
+}
+
+.introduction {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-weight: 400;
+  font-style: normal;
+  font-family: "League Gothic", "League Gothic Placeholder", sans-serif;
+  color: #000000;
+  font-size: 78px;
+  letter-spacing: 0;
+  line-height: 1.2;
+  text-align: right;
+  align-self: end;
+}
+@media (max-width: 768px) {
+  .introduction {
+    font-size: 40px;
+  }
+}
+.right2 {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow: visible;
+  position: relative;
+  font-weight: 100;
+  font-style: normal;
+  font-family: "Schibsted Grotesk", "Schibsted Grotesk Placeholder", sans-serif;
+  color: #000000;
+  font-size: 40px;
+  letter-spacing: 0em;
+  line-height: 1.5;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .right2 {
+    font-size: 25px;
+  }
+}
