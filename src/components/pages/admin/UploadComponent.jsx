@@ -1,12 +1,12 @@
 import {useEffect, useState} from "react";
 import {ApplicationService} from "../../../service/ApplicationService.js";
+import FileUpload from "../../ui/FileUpload.jsx";
 
-function Admin() {
+function UploadComponent() {
 
     const [files, setFiles] = useState([]);
 
     useEffect(() => {
-
         const fetchData = async () => {
             const result = await ApplicationService.getAchievements();
             console.log(result)
@@ -15,6 +15,7 @@ function Admin() {
 
         fetchData().then(r => console.log(r));
     }, []);
+
     return (
         <div>
             {files.map((file) => {
@@ -25,8 +26,9 @@ function Admin() {
                     </div>
                 )
             })}
+            <FileUpload/>
         </div>
     )
 }
 
-export default Admin
+export default UploadComponent
