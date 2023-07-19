@@ -13,8 +13,10 @@ export const ApplicationService = {
         let formData = new FormData();
 
         formData.append("file", file);
+        formData.append("name", file.name);
+        formData.append("description", "test description");
 
-        return axios.post(BASE_URL + "/file", formData, {
+        return axios.post(BASE_URL + "/upload", formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
@@ -33,7 +35,8 @@ export const ApplicationService = {
             // create "a" HTML element with href to file & click
             const link = document.createElement('a');
             link.href = href;
-            link.setAttribute('download', name); //or any other extension
+            link.setAttribute('download', name.match(/\..+$/) ? name : name + '.pdf');
+            // any other extension
             document.body.appendChild(link);
             link.click();
 
@@ -41,5 +44,47 @@ export const ApplicationService = {
             document.body.removeChild(link);
             URL.revokeObjectURL(href);
         });
+    },
+
+    deleteFile: async (fileId) => {
+        let formData = new FormData();
+
+        formData.append("id", Number(fileId));
+
+        return axios.post(
+            BASE_URL + "/delete-file",
+            null,
+            {
+                params: {
+                    id: Number(fileId)
+                },
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        )
+    },
+
+updateFile: async (fileId, name, description) => {
+        let formData = new FormData();
+
+        formData.append("id", Number(fileId));
+        formData.append("name", name);
+        formData.append("description", description);
+
+        return axios.post(
+            BASE_URL + "/update-file",
+            null,
+            {
+                params: {
+                    id: Number(fileId),
+                    name: name,
+                    description: description
+                },
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        )
     }
 }

@@ -2,6 +2,7 @@ import {Button, Form, Input, Popconfirm, Table} from 'antd';
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import {ApplicationService} from "../../../service/ApplicationService.js";
 import styles from './admin.module.css';
+import FileUpload from "../../ui/FileUpload.jsx";
 
 const EditableContext = React.createContext(null);
 const EditableRow = ({index, ...props}) => {
@@ -44,6 +45,9 @@ const EditableCell = ({
         try {
             const values = await form.validateFields();
             toggleEdit();
+            if (record[dataIndex] === values[dataIndex]) {
+                return;
+            }
             handleSave({
                 ...record,
                 ...values,
@@ -94,30 +98,23 @@ const FilesViewer = () => {
     useEffect(() => {
         const fetchData = async () => {
             const result = await ApplicationService.getAchievements();
+            console.log(result)
             result.forEach((item) => {
                 item.key = item.id;
             });
             setDataSource([
                 ...result,
-                {
-                    key: 87,
-                    name: 'Edward King 87',
-                    description: 'London, Park Lane no. 87',
-                }
             ]);
         };
         fetchData().then(() => setLoading(false));
     }, []);
 
-
     const handleDelete = (key) => {
-        // TODO delete file from server
+        ApplicationService.deleteFile(key).then(() => console.log("deleted")).catch((e) => console.log(e))
         const newData = dataSource.filter((item) => item.key !== key);
         setDataSource(newData);
     };
-    const handleDownload = (key) => {
-        // TODO download file from server
-        dataSource.forEach((item) => {
+    const handleDownload = (key) => {dataSource.forEach((item) => {
             if (item.key === key) {
                 ApplicationService.downloadFile(item.id, item.name).then(r => console.log(r))
             }
@@ -154,12 +151,11 @@ const FilesViewer = () => {
         },
 
     ];
-    const handleAdd = () => {
+    const handleAdd = (id, name, description) => {
         const newData = {
-            key: count,
-            name: `Edward King ${count}`,
-            age: '32',
-            address: `London, Park Lane no. ${count}`,
+            key: id,
+            name: name,
+            description: description,
         };
         setDataSource([...dataSource, newData]);
         setCount(count + 1);
@@ -167,8 +163,9 @@ const FilesViewer = () => {
     const handleSave = (row) => {
         const newData = [...dataSource];
         const index = newData.findIndex((item) => row.key === item.key);
-        // TODO update file on server
-        console.log(row.name, row.id)
+        ApplicationService.updateFile(row.id, row.name, row.description)
+            .then(() => console.log("updated"))
+            .catch((e) => console.log(e))
         const item = newData[index];
         newData.splice(index, 1, {
             ...item,
@@ -199,7 +196,7 @@ const FilesViewer = () => {
     });
     return (
         <div className={styles.table}>
-            <Button onClick={handleAdd} type="primary">Add a row</Button>
+            <FileUpload handleAdd={handleAdd}/>
             <Table
                 components={components}
                 rowClassName={() => 'editable-row'}
