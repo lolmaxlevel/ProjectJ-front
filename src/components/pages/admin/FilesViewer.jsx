@@ -94,7 +94,6 @@ const FilesViewer = () => {
     useEffect(() => {
         const fetchData = async () => {
             const result = await ApplicationService.getAchievements();
-            console.log(result)
             result.forEach((item) => {
                 item.key = item.id;
             });
@@ -120,7 +119,7 @@ const FilesViewer = () => {
         // TODO download file from server
         dataSource.forEach((item) => {
             if (item.key === key) {
-                console.log(item.name, item.id)
+                ApplicationService.downloadFile(item.id, item.name).then(r => console.log(r))
             }
         })
     }
