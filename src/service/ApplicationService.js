@@ -9,33 +9,31 @@ export const ApplicationService = {
         return response.data
     },
 
-    uploadFile: async (file, onUploadProgress) => {
+    uploadFile: async (file, name=file.name, description="test") => {
         let formData = new FormData();
 
         formData.append("file", file);
-        formData.append("name", file.name);
-        formData.append("description", "test description");
+        formData.append("name", name);
+        formData.append("description", description);
 
         return axios.post(BASE_URL + "/upload", formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
-            onUploadProgress,
         });
     },
 
-    downloadFile: async (fileId, name="1.pdf") => {
+    downloadFile: async (fileId) => {
         return axios.get(BASE_URL + "/files/" + fileId, {
             responseType: "blob",
         }).then((response) => {
             //little hack to download file using axios probably there is a better way :)
             // create file link in browser's memory
             const href = URL.createObjectURL(response.data);
-
             // create "a" HTML element with href to file & click
             const link = document.createElement('a');
             link.href = href;
-            link.setAttribute('download', name.match(/\..+$/) ? name : name + '.pdf');
+            link.setAttribute('download', response.headers.get('Content-Disposition').split('filename=')[1].replace(/"/g, ''));
             // any other extension
             document.body.appendChild(link);
             link.click();

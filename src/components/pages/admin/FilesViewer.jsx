@@ -2,10 +2,11 @@ import {Button, Form, Input, Popconfirm, Table} from 'antd';
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import {ApplicationService} from "../../../service/ApplicationService.js";
 import styles from './admin.module.css';
-import FileUpload from "../../ui/FileUpload.jsx";
+import UploadForm from "../../ui/UploadForm.jsx";
+
 
 const EditableContext = React.createContext(null);
-const EditableRow = ({index, ...props}) => {
+const EditableRow = ({...props}) => {
     const [form] = Form.useForm();
     return (
         <Form form={form} component={false}>
@@ -24,6 +25,8 @@ const EditableCell = ({
                           handleSave,
                           ...restProps
                       }) => {
+
+
     const [editing, setEditing] = useState(false);
     const inputRef = useRef(null);
     const form = useContext(EditableContext);
@@ -62,9 +65,6 @@ const EditableCell = ({
     if (editable) {
         childNode = editing ? (
             <Form.Item
-                style={{
-                    margin: 0,
-                }}
                 name={dataIndex}
                 rules={[
                     {
@@ -81,8 +81,7 @@ const EditableCell = ({
                 style={{
                     paddingRight: 24,
                 }}
-                onClick={toggleEdit}
-            >
+                onClick={toggleEdit}>
                 {children}
             </div>
         );
@@ -98,7 +97,6 @@ const FilesViewer = () => {
     useEffect(() => {
         const fetchData = async () => {
             const result = await ApplicationService.getAchievements();
-            console.log(result)
             result.forEach((item) => {
                 item.key = item.id;
             });
@@ -109,17 +107,47 @@ const FilesViewer = () => {
         fetchData().then(() => setLoading(false));
     }, []);
 
+    // Delete file from table and server
     const handleDelete = (key) => {
         ApplicationService.deleteFile(key).then(() => console.log("deleted")).catch((e) => console.log(e))
         const newData = dataSource.filter((item) => item.key !== key);
         setDataSource(newData);
     };
-    const handleDownload = (key) => {dataSource.forEach((item) => {
+    // Download file from server
+    const handleDownload = (key) => {
+        dataSource.forEach((item) => {
             if (item.key === key) {
                 ApplicationService.downloadFile(item.id, item.name).then(r => console.log(r))
             }
         })
     }
+
+    // Little hack to add new file to table without server request
+    const handleAdd = (id, name, description) => {
+        const newData = {
+            id: id,
+            key: id,
+            name: name,
+            description: description,
+        };
+        setDataSource([...dataSource, newData]);
+        setCount(count + 1);
+    };
+
+    // Update file on server and table
+    const handleSave = (row) => {
+        const newData = [...dataSource];
+        const index = newData.findIndex((item) => row.key === item.key);
+        ApplicationService.updateFile(row.id, row.name, row.description)
+            .then(() => console.log("updated"))
+            .catch((e) => console.log(e))
+        const item = newData[index];
+        newData.splice(index, 1, {
+            ...item,
+            ...row,
+        });
+        setDataSource(newData);
+    };
 
     const defaultColumns = [
         {
@@ -134,7 +162,7 @@ const FilesViewer = () => {
             width: '50%',
             editable: true,
         },
-                        {
+        {
             title: 'Download',
             dataIndex: 'operation',
             render: (_, record) =>
@@ -145,40 +173,20 @@ const FilesViewer = () => {
             title: 'Delete',
             dataIndex: 'operation',
             render: (_, record) =>
-                    <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
-                        <Button type="primary" danger> Delete </Button>
-                    </Popconfirm>
+                <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
+                    <Button type="primary" danger> Delete </Button>
+                </Popconfirm>
         },
 
     ];
-    const handleAdd = (id, name, description) => {
-        const newData = {
-            key: id,
-            name: name,
-            description: description,
-        };
-        setDataSource([...dataSource, newData]);
-        setCount(count + 1);
-    };
-    const handleSave = (row) => {
-        const newData = [...dataSource];
-        const index = newData.findIndex((item) => row.key === item.key);
-        ApplicationService.updateFile(row.id, row.name, row.description)
-            .then(() => console.log("updated"))
-            .catch((e) => console.log(e))
-        const item = newData[index];
-        newData.splice(index, 1, {
-            ...item,
-            ...row,
-        });
-        setDataSource(newData);
-    };
+
     const components = {
         body: {
             row: EditableRow,
             cell: EditableCell,
         },
     };
+
     const columns = defaultColumns.map((col) => {
         if (!col.editable) {
             return col;
@@ -195,8 +203,11 @@ const FilesViewer = () => {
         };
     });
     return (
+
         <div className={styles.table}>
-            <FileUpload handleAdd={handleAdd}/>
+            <div className={styles.uploadBlock}>
+                <UploadForm handleAdd={handleAdd}/>
+            </div>
             <Table
                 components={components}
                 rowClassName={() => 'editable-row'}
