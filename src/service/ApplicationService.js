@@ -1,15 +1,23 @@
 import axios from "axios";
+import {JwtManager} from "./JwtService.js";
 
-
+// const csrfToken = document.cookie.split("=")[1];
+// axios.defaults.headers.common['X-XSRF-TOKEN'] = csrfToken;
 const BASE_URL = 'http://localhost:8080'
+
+const instance = axios.create({
+        baseURL: BASE_URL,
+        withCredentials: true,
+    }
+)
 
 export const ApplicationService = {
     getAchievements: async () => {
-        const response = await axios.get(BASE_URL + '/all-files')
+        const response = await axios.get(BASE_URL + '/all-files', {})
         return response.data
     },
 
-    uploadFile: async (file, name=file.name, description="test") => {
+    uploadFile: async (file, name = file.name, description = "test") => {
         let formData = new FormData();
 
         formData.append("file", file);
@@ -19,8 +27,13 @@ export const ApplicationService = {
         return axios.post(BASE_URL + "/upload", formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${JwtManager.getCurrentAccessToken()}`,
             },
-        });
+        }.then((response) => {
+            refreshHandler(response, () => {
+                return response.data;
+            });
+        }));
     },
 
     downloadFile: async (fileId) => {
@@ -58,19 +71,16 @@ export const ApplicationService = {
                 },
                 headers: {
                     "Content-Type": "application/json",
+                    Authorization: `Bearer ${JwtManager.getCurrentAccessToken()}`,
                 },
             }
-        )
+        ).catch(reason => {console.log(reason)})
+
     },
 
-updateFile: async (fileId, name, description) => {
-        let formData = new FormData();
+    updateFile: async (fileId, name, description) => {
 
-        formData.append("id", Number(fileId));
-        formData.append("name", name);
-        formData.append("description", description);
-
-        return axios.post(
+        return axios.put(
             BASE_URL + "/update-file",
             null,
             {
@@ -81,8 +91,81 @@ updateFile: async (fileId, name, description) => {
                 },
                 headers: {
                     "Content-Type": "application/json",
+                    Authorization: `Bearer ${JwtManager.getCurrentAccessToken()}`,
                 },
             }
-        )
+        ).then((response) => {
+            refreshHandler(response, () => {
+                return response.data;
+            });
+        });
+    },
+
+    login: async function (username, password) {
+        return JwtManager.login(username, password);
+    },
+    logout: async function () {
+        return JwtManager.logout();
+    },
+    register: async function (username, password) {
+        console.log(document.cookie.split("=")[1])
+        let formData = new FormData()
+        formData.append("username", username)
+        formData.append("password", password)
+
+        return axios.post(`${BASE_URL}/register`, formData, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json",
+                // Do not add Authorization Header here
+            },
+        }).then((response) => {
+            console.log(response.headers)
+            if (response.status === 200) {
+                return response.json();
+            } else if (response.status === 409 || response.status === 403 || response.status === 400) {
+                return false;
+            } else {
+                console.log("Unexpected response status: " + response.status);
+                return false;
+            }
+        }).then((data) => {
+            if (data) {
+                localStorage.setItem("access_token", data.access_token);
+                localStorage.setItem("refresh_token", data.refresh_token);
+                localStorage.setItem("username", username);
+                return true;
+            }
+        }).catch((error) => {
+            console.log(error);
+            return false;
+        });
+    }
+}
+
+/**
+ * This function is used to handle 403 response status.
+ * If the response status is 403, it means that the access token has expired.
+ * In this case, we need to refresh the access token and repeat the request.
+ * @param response
+ * @param func
+ * @returns {*|Promise<*>}
+ */
+function refreshHandler(response, func) {
+
+    if (response.status === 403) {
+        console.log("Access token has expired, refreshing...");
+        return JwtManager.refreshAccessToken().then(
+            () => {
+                return func();
+            },
+            () => {
+                // The promise was rejected, so the refresh token has expired or is invalid
+                // We need to log out the user to prevent further errors
+                JwtManager.logout();
+            }
+        );
+    } else {
+        return response;
     }
 }

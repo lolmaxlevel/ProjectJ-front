@@ -6,6 +6,7 @@ import ForthBlock from "./forth_block/ForthBlock.jsx";
 import {AchievementBlock} from "./achievment_block/AchievmentBlock.jsx";
 import {ConnectBlock} from "./connect_block/ConnectBlock.jsx";
 import {Footer} from "./footer/Footer.jsx";
+import Login from "./Login.jsx";
 function Main() {
 
   return (
@@ -17,6 +18,7 @@ function Main() {
           <AchievementBlock/>
           <ConnectBlock/>
           <Footer/>
+          <Login/>
       </div>
   )
 }

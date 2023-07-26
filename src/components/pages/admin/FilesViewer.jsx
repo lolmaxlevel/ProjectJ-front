@@ -26,7 +26,6 @@ const EditableCell = ({
                           ...restProps
                       }) => {
 
-
     const [editing, setEditing] = useState(false);
     const inputRef = useRef(null);
     const form = useContext(EditableContext);
@@ -117,7 +116,7 @@ const FilesViewer = () => {
     const handleDownload = (key) => {
         dataSource.forEach((item) => {
             if (item.key === key) {
-                ApplicationService.downloadFile(item.id, item.name).then(r => console.log(r))
+                ApplicationService.downloadFile(item.id, item.name).then(() => {})
             }
         })
     }
@@ -205,9 +204,7 @@ const FilesViewer = () => {
     return (
 
         <div className={styles.table}>
-            <div className={styles.uploadBlock}>
-                <UploadForm handleAdd={handleAdd}/>
-            </div>
+
             <Table
                 components={components}
                 rowClassName={() => 'editable-row'}
@@ -217,6 +214,9 @@ const FilesViewer = () => {
                 loading={loading}
 
             />
+            <div className={styles.uploadBlock}>
+                <UploadForm handleAdd={handleAdd}/>
+            </div>
         </div>
     );
 };
