@@ -1,7 +1,8 @@
+import {lazy} from "react";
 import {Route, Routes} from "react-router-dom";
-import Main from "./components/pages/main/Main.jsx";
-import NotFound from "./components/pages/not_found/NotFound.jsx";
-import Admin from "./components/pages/admin/AdminPage.jsx";
+const Admin = lazy(() => import("./components/pages/admin/AdminPage.jsx"));
+const Main = lazy(() => import("./components/pages/main/Main.jsx"));
+const NotFound = lazy(() => import("./components/pages/not_found/NotFound.jsx"));
 
 function App() {
 

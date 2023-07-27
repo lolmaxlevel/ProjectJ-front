@@ -1,8 +1,10 @@
+import { lazy } from 'react';
 import styles from '../../../assets/styles/global.module.css'
-import FirstBlock from "./first_block/FirstBlock.jsx";
-import SecondBlock from "./second_block/SecondBlock.jsx";
-import ThirdBlock from "./third_block/ThirdBlock.jsx";
-import ForthBlock from "./forth_block/ForthBlock.jsx";
+
+const FirstBlock = lazy( () => import("./first_block/FirstBlock.jsx"));
+const SecondBlock = lazy( () => import("./second_block/SecondBlock.jsx"));
+const ThirdBlock = lazy( () => import("./third_block/ThirdBlock.jsx"));
+const ForthBlock = lazy( () => import("./forth_block/ForthBlock.jsx"));
 import {AchievementBlock} from "./achievment_block/AchievmentBlock.jsx";
 import {ConnectBlock} from "./connect_block/ConnectBlock.jsx";
 import {Footer} from "./footer/Footer.jsx";
