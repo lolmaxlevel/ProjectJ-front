@@ -10,7 +10,7 @@ export const JwtManager = {
      * @returns {Promise<any>}
      */
     login(username, password) {
-        const body = JSON.stringify({ username: username, password: password });
+        const body = JSON.stringify({username: username, password: password});
         return fetch(`${BASE_URL}login`, {
             method: "POST",
             headers: {
@@ -28,15 +28,12 @@ export const JwtManager = {
                 }
             })
             .then((data) => {
-                localStorage.setItem("access_token", data.access_token);
-                localStorage.setItem("refresh_token", data.refresh_token);
-                localStorage.setItem("username", username);
-                return true;
-            })
-            .catch((error) => {
-                console.log(error);
-                return false;
-            });
+                    localStorage.setItem("access_token", data.access_token);
+                    localStorage.setItem("refresh_token", data.refresh_token);
+                    localStorage.setItem("username", username);
+                    return true;
+                }
+            );
     },
 
     /**
@@ -52,7 +49,7 @@ export const JwtManager = {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ refresh_token: refresh_token }),
+            body: JSON.stringify({refresh_token: refresh_token}),
         })
             .then((response) => {
                 if (response.status === 200) {
