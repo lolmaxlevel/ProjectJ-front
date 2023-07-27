@@ -11,6 +11,9 @@ function AdminPage() {
     }
 
 return (
+
+
+
     <Layout>
         <AdminHeader callback={aboba}/>
         {page === 1 && <FilesViewer/>}
