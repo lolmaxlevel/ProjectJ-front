@@ -5,11 +5,6 @@ import {JwtManager} from "./JwtService.js";
 // axios.defaults.headers.common['X-XSRF-TOKEN'] = csrfToken;
 const BASE_URL = 'http://localhost:8080'
 
-const instance = axios.create({
-        baseURL: BASE_URL,
-        withCredentials: true,
-    }
-)
 
 export const ApplicationService = {
     getAchievements: async () => {
@@ -29,11 +24,12 @@ export const ApplicationService = {
                 "Content-Type": "multipart/form-data",
                 Authorization: `Bearer ${JwtManager.getCurrentAccessToken()}`,
             },
-        }.then((response) => {
-            refreshHandler(response, () => {
-                return response.data;
+        }
+        ).catch((error) => {
+            refreshHandler(error.response, () => {
+                ApplicationService.uploadFile(file, name, description)
             });
-        }));
+        })
     },
 
     downloadFile: async (fileId) => {
@@ -74,12 +70,14 @@ export const ApplicationService = {
                     Authorization: `Bearer ${JwtManager.getCurrentAccessToken()}`,
                 },
             }
-        ).catch(reason => {console.log(reason)})
-
+        ).catch((error) => {
+            refreshHandler(error.response, () => {
+                ApplicationService.deleteFile(fileId)
+            });
+        })
     },
 
     updateFile: async (fileId, name, description) => {
-
         return axios.put(
             BASE_URL + "/update-file",
             null,
@@ -94,11 +92,11 @@ export const ApplicationService = {
                     Authorization: `Bearer ${JwtManager.getCurrentAccessToken()}`,
                 },
             }
-        ).then((response) => {
-            refreshHandler(response, () => {
-                return response.data;
+        ).catch((error) => {
+            refreshHandler(error.response, () => {
+                ApplicationService.updateFile(fileId, name, description)
             });
-        });
+        })
     },
 
     login: async function (username, password) {
@@ -107,6 +105,7 @@ export const ApplicationService = {
     logout: async function () {
         return JwtManager.logout();
     },
+
     register: async function (username, password) {
         console.log(document.cookie.split("=")[1])
         let formData = new FormData()

@@ -1,10 +1,10 @@
 import {useNavigate} from 'react-router-dom';
-
+import styles from './header.module.css';
 function MainHeader() {
     const navigate = useNavigate();
     return (
-        <header style={{position: "fixed"}}>
-            <h1 onClick={() => navigate(-1)}>A Typical Page</h1>
+        <header className={styles.main}>
+            <h1 onClick={() => navigate(-1)} className={styles.arrow}>➤</h1>
         </header>
     );
 }

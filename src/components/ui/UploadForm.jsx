@@ -44,7 +44,8 @@ function UploadForm({handleAdd}) {
             setFileList([]);
             message.success('upload successfully.');
             handleAdd(response.data.id, response.data.name, response.data.description);
-        }).catch(() => {
+        }).catch((reason) => {
+            console.log(reason)
             message.error('upload failed.');
             setUploading(false)
             setFileList([])

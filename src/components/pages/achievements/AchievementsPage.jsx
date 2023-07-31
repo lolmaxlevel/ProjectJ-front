@@ -1,17 +1,30 @@
 import {Footer} from "../main/footer/Footer.jsx";
 import AchievementCard from "./AchievementsCard.jsx";
 import MainHeader from "../../ui/header/MainHeader.jsx";
+import {useEffect, useState} from "react";
+import {ApplicationService} from "../../../service/ApplicationService.js";
 
 function AchievementsPage() {
+    const [files, setFiles] = useState([])
 
+    useEffect(() => {
+        ApplicationService.getAchievements().then((response) => {
+            setFiles(response)
+        })
+
+    }, []);
     return (
-        <div style={{height:"100%"}}>
+        <div style={{display:"flex", minHeight:"100vh", flexDirection:"column", justifyContent:"space-between"}}>
             <MainHeader/>
-            <AchievementCard count={1} file={1202}/>
-            <AchievementCard count={2} file={1202}/>
-            <AchievementCard count={3} file={1202}/>
-            <AchievementCard count={4} file={1202}/>
-            <AchievementCard count={5} file={1202}/>
+            <div style={{minHeight:"100px"}}>
+            {files.map((file, index) => {
+                return (
+                    <AchievementCard key={index} count={index+1} file={file.id} description={file.description}
+                                     name={file.name}/>
+                )
+            })
+            }
+            </div>
             <Footer/>
         </div>
     );

@@ -12,7 +12,7 @@ function App() {
 
     return (
         <Routes>
-            <Route path="/" element={<Main/>}/>
+            <Route path="/" element={<Suspense><Main/></Suspense>}/>
             <Route path="/login" element={<Suspense><Login/></Suspense>}/>
             <Route path="/*" element={<NotFound/>}/>
             <Route path="/admin" element={<PrivateRoute><AdminPage/></PrivateRoute>}/>

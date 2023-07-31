@@ -84,7 +84,7 @@ const PdfViewer = ({file}) => {
                             enableSmoothScroll={true}
                             fileUrl={`http://localhost:8080/files/`+file}
                             plugins={[defaultLayoutPluginInstance]}
-                            renderLoader={() => <Skeleton.Button active style={{width:"800px", height:"500px"}}/>}
+                            renderLoader={() => <Skeleton.Button active style={{ height:"500px"}}/>}
                         />
 
             </div>

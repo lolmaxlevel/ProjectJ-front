@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8080/";
+const BASE_URL = "http://localhost:8080";
 /**
  * This object is responsible for managing JWT tokens and user authentication.
  */
@@ -11,7 +11,7 @@ export const JwtManager = {
      */
     login(username, password) {
         const body = JSON.stringify({username: username, password: password});
-        return fetch(`${BASE_URL}login`, {
+        return fetch(`${BASE_URL}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
