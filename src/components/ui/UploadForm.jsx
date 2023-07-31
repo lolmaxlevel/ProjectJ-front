@@ -43,6 +43,7 @@ function UploadForm({handleAdd}) {
             form.resetFields();
             setFileList([]);
             message.success('upload successfully.');
+            setUploading(false)
             handleAdd(response.data.id, response.data.name, response.data.description);
         }).catch((reason) => {
             console.log(reason)
