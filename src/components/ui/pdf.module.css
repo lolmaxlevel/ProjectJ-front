@@ -1,0 +1,9 @@
+.viewer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.viewer-layout-main {
+    overflow: hidden;
+}
