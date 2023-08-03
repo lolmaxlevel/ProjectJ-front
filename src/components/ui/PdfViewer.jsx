@@ -6,7 +6,7 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import {defaultLayoutPlugin} from "@react-pdf-viewer/default-layout";
 import {Skeleton} from 'antd';
 
-
+const BASE_URL = `http://${import.meta.env.VITE_BASE_URL}`
 const PdfViewer = ({file}) => {
     const renderToolbar = Toolbar => (
         <Toolbar>
@@ -82,7 +82,7 @@ const PdfViewer = ({file}) => {
                         <Viewer
                             defaultScale={SpecialZoomLevel.ActualSize}
                             enableSmoothScroll={true}
-                            fileUrl={`http://localhost:8080/files/`+file}
+                            fileUrl={`${BASE_URL}/files/`+file}
                             plugins={[defaultLayoutPluginInstance]}
                             renderLoader={() => <Skeleton loading={true} active/>}
                         />

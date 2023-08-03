@@ -3,7 +3,7 @@ import {JwtManager} from "./JwtService.js";
 
 // const csrfToken = document.cookie.split("=")[1];
 // axios.defaults.headers.common['X-XSRF-TOKEN'] = csrfToken;
-const BASE_URL = 'http://localhost:8080'
+const BASE_URL = `http://${import.meta.env.VITE_BASE_URL}`
 
 
 export const ApplicationService = {

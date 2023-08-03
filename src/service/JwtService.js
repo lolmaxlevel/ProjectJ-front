@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = `http://${import.meta.env.VITE_BASE_URL}`
 /**
  * This object is responsible for managing JWT tokens and user authentication.
  */
