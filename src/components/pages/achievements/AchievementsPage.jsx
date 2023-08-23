@@ -1,4 +1,4 @@
-import {Footer} from "../main/footer/Footer.jsx";
+import {Footer} from "../../ui/footer/Footer.jsx";
 import AchievementCard from "./AchievementsCard.jsx";
 import MainHeader from "../../ui/header/MainHeader.jsx";
 import {useEffect, useState} from "react";
@@ -6,17 +6,14 @@ import {ApplicationService} from "../../../service/ApplicationService.js";
 import {mixHexes} from "../../../utils/ColorsMixer.js";
 
 function AchievementsPage() {
-    const [files, setFiles] = useState([])
+    const [files, setFiles] = useState([1, 2, 3, 4])
 
-    const [skeleton, setSkeleton] = useState(false);
+    const [skeleton, setSkeleton] = useState(true);
     useEffect(() => {
         ApplicationService.getAchievements().then((response) => {
+            setSkeleton(false)
             setFiles(response)
-        }).catch(() => {
-                setFiles([1, 2, 3, 4])
-                setSkeleton(true)
-            }
-        )
+        })
         window.addEventListener('scroll', changeColorOnScroll)
     }, []);
 
@@ -48,8 +45,8 @@ function AchievementsPage() {
             <div style={{minHeight: "100px"}}>
                 {files.map((file, index) => {
                     return (
-                        <AchievementCard key={index} side={index % 2} bgColor={bgColors[index + 1 % 6]}
-                                         textColor={textColors[index + 1 % 6]} file={file.id}
+                        <AchievementCard key={index} side={index % 2} bgColor={bgColors[(index + 1) % 6]}
+                                         textColor={textColors[(index + 1) % 6]} file={file.id}
                                          description={file.description}
                                          name={file.name} skeleton={skeleton}/>
                     )

@@ -25,9 +25,9 @@ export function ConnectBlock() {
                     <h3 className={styles.text}>Julia loves sharing ideas, discussing teaching strategies, or just talking about her world of Computer Science. Reach out and give her a virtual high-five on social media!</h3>
                 </div>
                 <div className={styles.social}>
-                    <SocialLink icon="/twitter.svg" link="https://google.com" text="Twitter"/>
-                    <SocialLink icon="/inst.svg" link="https://google.com" text="Instagram"/>
-                    <SocialLink icon="/linkedin.svg" link="https://google.com" text="LinkedIn" isLast={true}/>
+                    <SocialLink icon="/links/twitter.svg" link="https://google.com" text="Twitter"/>
+                    <SocialLink icon="/links/inst.svg" link="https://google.com" text="Instagram"/>
+                    <SocialLink icon="/links/linkedin.svg" link="https://google.com" text="LinkedIn" isLast={true}/>
                 </div>
             </div>
         </div>

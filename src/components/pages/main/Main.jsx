@@ -7,7 +7,7 @@ const ThirdBlock = lazy( () => import("./third_block/ThirdBlock.jsx"));
 const ForthBlock = lazy( () => import("./forth_block/ForthBlock.jsx"));
 import {AchievementBlock} from "./achievment_block/AchievmentBlock.jsx";
 import {ConnectBlock} from "./connect_block/ConnectBlock.jsx";
-import {Footer} from "./footer/Footer.jsx";
+import {Footer} from "../../ui/footer/Footer.jsx";
 function Main() {
 
   return (

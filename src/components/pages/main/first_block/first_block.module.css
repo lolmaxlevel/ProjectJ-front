@@ -34,6 +34,7 @@
     align-content: center;
     flex-wrap: nowrap;
     gap: 40px;
+    user-select: none;
 }
 
 .content p {
@@ -146,7 +147,7 @@
 
 .hat {
     position: absolute;
-    width: 42vw;
+    height: 35vmin;
 }
 
 @media screen and (min-width: 1200px) {
@@ -157,4 +158,16 @@
     .hat {
         width: 500px;
     }
+}
+
+.logo {
+  position: relative;
+  width: 300px;
+}
+
+.logo > img {
+  width: 100%;
+  position: absolute;
+    top: -65px;
+    left: 0;
 }

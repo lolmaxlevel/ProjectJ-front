@@ -1,8 +1,8 @@
 import styles from './footer.module.css';
-import {InstagramLogo} from "../../../ui/logo/InstagramLogo.jsx";
-import {TwitterLogo} from "../../../ui/logo/TwitterLogo.jsx";
-import {FbLogo} from "../../../ui/logo/FbLogo.jsx";
-import {TwitchLogo} from "../../../ui/logo/TwitchLogo.jsx";
+import {InstagramLogo} from "./logo/InstagramLogo.jsx";
+import {TwitterLogo} from "./logo/TwitterLogo.jsx";
+import {FbLogo} from "./logo/FbLogo.jsx";
+import {TwitchLogo} from "./logo/TwitchLogo.jsx";
 
 export function Footer() {
     return (

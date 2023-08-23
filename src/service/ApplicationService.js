@@ -42,7 +42,7 @@ export const ApplicationService = {
             // create "a" HTML element with href to file & click
             const link = document.createElement('a');
             link.href = href;
-            link.setAttribute('download', response.headers.get('Content-Disposition').split('filename=')[1].replace(/"/g, ''));
+            link.setAttribute('download', response.headers.get('FirstBlockContent-Disposition').split('filename=')[1].replace(/"/g, ''));
             // any other extension
             document.body.appendChild(link);
             link.click();

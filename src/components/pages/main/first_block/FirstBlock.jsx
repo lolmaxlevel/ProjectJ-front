@@ -1,5 +1,5 @@
 import styles from './first_block.module.css'
-import Content from "./Content.jsx";
+import FirstBlockContent from "./FirstBlockContent.jsx";
 import { useAnimate, useInView } from "framer-motion"
 import {useEffect} from "react";
 function FirstBlock() {
@@ -19,7 +19,7 @@ function FirstBlock() {
     return (
       <div className={styles.hero}>
           <div ref={scope}>
-            <Content/>
+            <FirstBlockContent/>
           </div>
       </div>
   )
