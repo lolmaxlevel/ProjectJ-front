@@ -162,12 +162,11 @@
 
 .logo {
   position: relative;
-  width: 300px;
+  width: 370px;
+    top: -200px;
 }
 
 .logo > img {
   width: 100%;
-  position: absolute;
-    top: -65px;
-    left: 0;
+position: absolute;
 }

@@ -13,11 +13,11 @@ function AnimatedLogo() {
         const shift = (image, index, rangeX, rangeY) => {
             const active = getActive();
 
-            const translationIntensity = active ? 24 : 4,
+            const translationIntensity = active ? 24 : 7,
                 maxTranslation = translationIntensity * (index + 1),
                 currentTranslation = `${maxTranslation * rangeX}% ${maxTranslation * rangeY}%`;
 
-            const scale = active ? 1 + (index * 0.4) : 1;
+            const scale = active ? 1 + (index * 0.15) : 1;
 
             image.animate({
                 translate: currentTranslation,
@@ -65,11 +65,11 @@ function AnimatedLogo() {
 
     return (
         <div className={styles.logo} id="logo">
-            <img src="https://assets.codepen.io/1468070/Hyperplexed+Logo+-+Color+1.svg" draggable="false"/>
-            <img src="https://assets.codepen.io/1468070/Hyperplexed+Logo+-+Color+2.svg" draggable="false"/>
-            <img src="https://assets.codepen.io/1468070/Hyperplexed+Logo+-+Color+3.svg" draggable="false"/>
-            <img src="https://assets.codepen.io/1468070/Hyperplexed+Logo+-+Color+4.svg" draggable="false"/>
-            <img src="https://assets.codepen.io/1468070/Hyperplexed+Logo+-+Color+5.svg" draggable="false"/>
+            <img src={"logo/main_logo_5.svg"} draggable={false} alt="logo"/>
+            <img src={"logo/main_logo_4.svg"} draggable={false} alt="logo"/>
+            <img src={"logo/main_logo_3.svg"} draggable={false} alt="logo"/>
+            <img src={"logo/main_logo_2.svg"} draggable={false} alt="logo"/>
+            <img src={"logo/main_logo_1.svg"} draggable={false} alt="logo"/>
         </div>
     )
 }
