@@ -21,12 +21,11 @@ function FirstBlockContent() {
 
     return (
         <div className={styles.content} ref={first_scope}>
-            <p className={styles.juliaSSchool}>Julia’s School</p>
+            <p className={styles.juliaSSchool} onClick={() => navigate("/school")}>Julia’s School</p>
             {/*<AnimatedText text={"HELLO"}/>*/}
             <p className={styles.explore}>Explore</p>
             <p className={styles.teaching}>Teaching</p>
             <p className={styles.achievements} onClick={() => navigate("/achievements")}>Achievements</p>
-            {/*<img className={styles.hat} src={'/main_logo.svg'} alt={''}/>*/}
             <AnimatedLogo/>
         </div>
     )

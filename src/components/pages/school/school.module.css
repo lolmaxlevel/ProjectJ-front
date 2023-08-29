@@ -1,0 +1,13 @@
+.cardGrid {
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 20px;
+    padding: 50px 20px;
+}
+
+.container {
+    background-color: #D992C8;
+}

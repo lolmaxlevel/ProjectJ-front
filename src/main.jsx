@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <DevSupport ComponentPreviews={ComponentPreviews}
                         useInitialHook={useInitial}
             >
-                <App/>
+                    <App/>
             </DevSupport>
         </BrowserRouter>
     </React.StrictMode>

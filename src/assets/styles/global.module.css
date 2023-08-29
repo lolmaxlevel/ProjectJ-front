@@ -6,3 +6,7 @@
 .desktop {
   background-color: #ffbf81;
 }
+.ant-card-actions {
+    background: #D992C8 !important;
+    color: yellow !important;
+}
