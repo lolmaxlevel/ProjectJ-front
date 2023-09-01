@@ -11,3 +11,25 @@
 .container {
     background-color: #D992C8;
 }
+
+.disclaimer {
+    font-weight: 700;
+    font-style: normal;
+    font-family: "Inter", "Inter Placeholder", sans-serif;
+    color: #333333;
+    font-size: 41px;
+    letter-spacing: -2.6px;
+    line-height: 1.2;
+    text-align: center;
+    margin: 0 auto;
+    padding: 60px 0;
+    max-width: 1200px;
+}
+
+.disclaimerContainer {
+    background-color: rgb(255, 220, 199);
+}
+.links {
+    text-decoration: none;
+    color: #b77676;
+}

@@ -58,16 +58,16 @@ function MainHeader() {
                     <ConfigProvider theme={
                         {
                             components: {
-                                Dropdown:{
-                                        colorBgElevated: "#111111",
+                                Dropdown: {
+                                    colorBgElevated: "#111111",
                                     colorText: "#f1e1ef",
                                 },
-                            token: {
-                                fontFamily: `"Inter", sans-serif`,
-                                fontSize:"14px"
+                                token: {
+                                    fontFamily: `"Inter", sans-serif`,
+                                    fontSize: "14px"
+                                }
                             }
-                        }
-                    }}>
+                        }}>
                         <Dropdown
                             placement={"bottom"}
                             menu={{
