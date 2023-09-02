@@ -22,13 +22,20 @@
     line-height: 1.2;
     text-align: center;
     margin: 0 auto;
-    padding: 60px 0;
+    padding: 60px 10px;
     max-width: 1200px;
+}
+@media screen and (max-width: 700px) {
+    .disclaimer {
+        font-size: 30px;
+        padding: 30px 10px;
+    }
 }
 
 .disclaimerContainer {
     background-color: rgb(255, 220, 199);
 }
+
 .links {
     text-decoration: none;
     color: #b77676;
