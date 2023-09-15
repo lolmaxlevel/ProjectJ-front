@@ -21,7 +21,7 @@ function ClassPage() {
             setOther(materialsByGrade.filter(material => material.type === "Other"))
             console.log(response);
         })
-    }, []);
+    }, [currentClass]);
 
     return (
         <div>
