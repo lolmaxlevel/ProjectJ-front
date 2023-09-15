@@ -189,12 +189,32 @@ const ClassMaterialViewer = () => {
         {
             title: "Grade",
             dataIndex: "grade",
+            filters: [
+                {text: "5-6", value: "5-6"},
+                {text: "7A", value: "7A"},
+                {text: "7L", value: "7Л"},
+                {text: "8A", value: "8A"},
+                {text: "8L", value: "8Л"},
+                {text: "9A", value: "9A"},
+                {text: "9L", value: "9Л"},
+                {text: "10", value: "10"},
+                {text: "11", value: "11"},
+            ],
+            onFilter: (value, record) => record.grade.indexOf(value) === 0,
             width: "10%",
+            sorter: (a, b) => a.grade.localeCompare(b.grade),
         },
         {
             title: "Type",
             dataIndex: "type",
+            filters: [
+                {text: "ДЗ", value: "ДЗ"},
+                {text: "КР", value: "КР"},
+                {text: "Другое", value: "Другое"},
+            ],
             width: "20%",
+            onFilter: (value, record) => record.type.indexOf(value) === 0,
+            sorter: (a, b) => a.type.localeCompare(b.type),
         },
         {
             title: "Delete",
