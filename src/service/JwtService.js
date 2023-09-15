@@ -40,7 +40,6 @@ export const JwtManager = {
      * Used to refresh the access token
      * @returns access token or null if there was an error*/
     refreshAccessToken() {
-        console.log("refreshing access token")
         const refresh_token = localStorage.getItem("refresh_token");
         if (refresh_token === null) {
             return Promise.reject("No refresh token");

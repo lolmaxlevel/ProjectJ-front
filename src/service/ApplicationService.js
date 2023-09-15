@@ -160,7 +160,6 @@ export const ApplicationService = {
                 },
             }
         ).catch((error) => {
-            console.log(123)
             refreshHandler(error.response, () => {
                 ApplicationService.addSchoolMaterial(name, link, grade, type)
             });
@@ -168,9 +167,7 @@ export const ApplicationService = {
     },
     deleteSchoolMaterial: async (id) => {
         let formData = new FormData();
-
         formData.append("id", Number(id));
-
         return axios.post(
             BASE_URL + "/school/delete-material",
             null,

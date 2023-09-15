@@ -21,7 +21,7 @@ function App() {
             <Route path="/admin" element={<PrivateRoute><AdminPage/></PrivateRoute>}/>
             <Route path="/achievements" element={<Suspense><AchievementsPage/></Suspense>}/>
             <Route path="/school" element={<Suspense><SchoolPage/></Suspense>}/>
-            <Route path={"/class/:classId"} element={<Suspense><ClassPage/></Suspense>}/>
+            <Route path={"school/class/:classId"} element={<Suspense><ClassPage/></Suspense>}/>
         </Routes>
     )
 }

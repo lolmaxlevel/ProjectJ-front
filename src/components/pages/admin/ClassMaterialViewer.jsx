@@ -44,9 +44,11 @@ const EditableCell = ({
     };
 
     const save = async () => {
+
         try {
             const values = await form.validateFields();
             toggleEdit();
+
             if (record[dataIndex] === values[dataIndex]) {
                 return;
             }
@@ -133,7 +135,7 @@ const ClassMaterialViewer = () => {
         setMaterials((prevMaterials) => [...prevMaterials, newMaterial]);
     };
 
-    const saveMaterial = (updatedMaterial) => {
+    const handleSave = (updatedMaterial) => {
         ApplicationService.updateSchoolMaterial(
             updatedMaterial.id,
             updatedMaterial.name,
@@ -191,17 +193,17 @@ const ClassMaterialViewer = () => {
             dataIndex: "grade",
             filters: [
                 {text: "5-6", value: "5-6"},
-                {text: "7A", value: "7A"},
-                {text: "7L", value: "7Л"},
-                {text: "8A", value: "8A"},
-                {text: "8L", value: "8Л"},
-                {text: "9A", value: "9A"},
-                {text: "9L", value: "9Л"},
+                {text: "7А", value: "7A"},
+                {text: "7Л", value: "7Л"},
+                {text: "8А", value: "8A"},
+                {text: "8Л", value: "8Л"},
+                {text: "9А", value: "9A"},
+                {text: "9Л", value: "9Л"},
                 {text: "10", value: "10"},
                 {text: "11", value: "11"},
             ],
-            onFilter: (value, record) => record.grade.indexOf(value) === 0,
             width: "10%",
+            onFilter: (value, record) => record.grade.indexOf(value) === 0,
             sorter: (a, b) => a.grade.localeCompare(b.grade),
         },
         {
@@ -242,12 +244,12 @@ const ClassMaterialViewer = () => {
         }
         return {
             ...column,
-            onCell: (material) => ({
-                material,
+            onCell: (record) => ({
+                record,
                 editable: column.editable,
                 dataIndex: column.dataIndex,
                 title: column.title,
-                handleSave: saveMaterial,
+                handleSave: handleSave,
             }),
         };
     });

@@ -1,8 +1,10 @@
 import {Button, Card, ConfigProvider} from 'antd';
+import {useNavigate} from "react-router-dom";
 
 const {Meta} = Card;
 
 function ClassCard({title, description, link, color}) {
+    const navigate = useNavigate();
     const theme = {
         components: {
             Card: {
@@ -42,6 +44,7 @@ function ClassCard({title, description, link, color}) {
                     type="primary"
                     style={{marginTop: 30, fontWeight: "600", padding: "0 20px"}}
                     size="large"
+                    onClick={() => navigate("class/" + link)}
                 >
                     Read More
                 </Button>
