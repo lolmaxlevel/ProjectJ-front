@@ -82,7 +82,7 @@ const PdfViewer = ({file}) => {
                         <Viewer
                             defaultScale={SpecialZoomLevel.ActualSize}
                             enableSmoothScroll={true}
-                            fileUrl={`${BASE_URL}/files/`+file}
+                            fileUrl={`${BASE_URL}/files/file/`+file}
                             plugins={[defaultLayoutPluginInstance]}
                             renderLoader={() => <Skeleton loading={true} active/>}
                         />

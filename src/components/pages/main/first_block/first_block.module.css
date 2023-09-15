@@ -120,13 +120,12 @@
     animation-iteration-count: infinite;
 }
 
-
-
 .logo {
     position: relative;
     width: 14vw;
     top: -7vw;
     min-width: 150px;
+    max-width: 330px;
 }
 
 .logo > img {
@@ -141,7 +140,7 @@
         top: -25vw;
     }
 }
-@media screen and (max-width: 2000px) {
+@media screen and (max-width: 1400px) {
     .logo {
         width: 25vw;
         top: -12vw;

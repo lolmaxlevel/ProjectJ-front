@@ -1,0 +1,59 @@
+.container {
+    background-color: #F6CCFF;
+}
+
+.card_grid {
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 20px;
+    padding: 100px 20px;
+
+}
+
+.cardTitle {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow: visible;
+  position: relative;
+  text-shadow: 2px 2px 2px #ffffff;
+  font-weight: 800;
+  font-style: normal;
+  font-family: "Inter", sans-serif;
+  color: #000000;
+  font-size: 24px;
+  letter-spacing: -0.8px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.link {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow: visible;
+  position: relative;
+  font-weight: 400;
+  font-style: normal;
+  font-family: "Aclonica", "Aclonica Placeholder", sans-serif;
+  color: #3d0099;
+  font-size: 23px;
+  letter-spacing: -1.0px;
+  text-decoration: underline;
+  line-height: 1.4;
+  text-align: left;
+    cursor: pointer;
+}
+
+.link:hover {
+    color: #9856f1;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.links {
+    padding-top: 10px;
+}

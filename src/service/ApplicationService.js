@@ -8,7 +8,7 @@ const BASE_URL = `http://${import.meta.env.VITE_BASE_URL}`
 
 export const ApplicationService = {
     getAchievements: async () => {
-        const response = await axios.get(BASE_URL + '/all-files', {})
+        const response = await axios.get(BASE_URL + '/files/all-files', {})
         return response.data
     },
 
@@ -20,11 +20,11 @@ export const ApplicationService = {
         formData.append("description", description);
 
         return axios.post(BASE_URL + "/upload", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-                Authorization: `Bearer ${JwtManager.getCurrentAccessToken()}`,
-            },
-        }
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    Authorization: `Bearer ${JwtManager.getCurrentAccessToken()}`,
+                },
+            }
         ).catch((error) => {
             refreshHandler(error.response, () => {
                 ApplicationService.uploadFile(file, name, description)
@@ -33,7 +33,7 @@ export const ApplicationService = {
     },
 
     downloadFile: async (fileId) => {
-        return axios.get(BASE_URL + "/files/" + fileId, {
+        return axios.get(BASE_URL + "/files/upload" + fileId, {
             responseType: "blob",
         }).then((response) => {
             //little hack to download file using axios probably there is a better way :)
@@ -59,7 +59,7 @@ export const ApplicationService = {
         formData.append("id", Number(fileId));
 
         return axios.post(
-            BASE_URL + "/delete-file",
+            BASE_URL + "/files/delete-file",
             null,
             {
                 params: {
@@ -79,7 +79,7 @@ export const ApplicationService = {
 
     updateFile: async (fileId, name, description) => {
         return axios.put(
-            BASE_URL + "/update-file",
+            BASE_URL + "/files/update-file",
             null,
             {
                 params: {
@@ -112,7 +112,7 @@ export const ApplicationService = {
         formData.append("username", username)
         formData.append("password", password)
 
-        return axios.post(`${BASE_URL}/register`, formData, {
+        return axios.post(`${BASE_URL}/auth/register`, formData, {
             withCredentials: true,
             headers: {
                 "Content-Type": "application/json",
@@ -139,7 +139,79 @@ export const ApplicationService = {
             console.log(error);
             return false;
         });
-    }
+    },
+
+    getSchoolMaterials: async () => {
+        const response = await axios.get(BASE_URL + '/school/all-materials', {})
+        return response.data
+    },
+
+    addSchoolMaterial: async (name, link, grade, type) => {
+        let formData = new FormData();
+
+        formData.append("name", name);
+        formData.append("link", link);
+        formData.append("grade", grade);
+        formData.append("type", type);
+
+        return axios.post(BASE_URL + "/school/add", formData, {
+                headers: {
+                    Authorization: `Bearer ${JwtManager.getCurrentAccessToken()}`,
+                },
+            }
+        ).catch((error) => {
+            console.log(123)
+            refreshHandler(error.response, () => {
+                ApplicationService.addSchoolMaterial(name, link, grade, type)
+            });
+        })
+    },
+    deleteSchoolMaterial: async (id) => {
+        let formData = new FormData();
+
+        formData.append("id", Number(id));
+
+        return axios.post(
+            BASE_URL + "/school/delete-material",
+            null,
+            {
+                params: {
+                    id: Number(id)
+                },
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${JwtManager.getCurrentAccessToken()}`,
+                },
+            }
+        ).catch((error) => {
+            refreshHandler(error.response, () => {
+                ApplicationService.deleteSchoolMaterial(id)
+            });
+        })
+    },
+    updateSchoolMaterial: async (id, name, link, grade, type) => {
+        return axios.put(
+            BASE_URL + "/school/update-material",
+            null,
+            {
+                params: {
+                    id: Number(id),
+                    name: name,
+                    link: link,
+                    grade: grade,
+                    type: type
+                },
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${JwtManager.getCurrentAccessToken()}`,
+                },
+            }
+        ).catch((error) => {
+            refreshHandler(error.response, () => {
+                ApplicationService.updateSchoolMaterial(id, name, link, grade, type)
+            });
+        })
+    },
 }
 
 /**
@@ -151,7 +223,6 @@ export const ApplicationService = {
  * @returns {*|Promise<*>}
  */
 function refreshHandler(response, func) {
-
     if (response.status === 403) {
         console.log("Access token has expired, refreshing...");
         return JwtManager.refreshAccessToken().then(

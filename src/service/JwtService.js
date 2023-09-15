@@ -11,7 +11,7 @@ export const JwtManager = {
      */
     login(username, password) {
         const body = JSON.stringify({username: username, password: password});
-        return fetch(`${BASE_URL}/login`, {
+        return fetch(`${BASE_URL}/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -38,13 +38,14 @@ export const JwtManager = {
 
     /**
      * Used to refresh the access token
-     * @returns new access token or null if there was an error
-     */ refreshAccessToken() {
+     * @returns access token or null if there was an error*/
+    refreshAccessToken() {
+        console.log("refreshing access token")
         const refresh_token = localStorage.getItem("refresh_token");
         if (refresh_token === null) {
             return Promise.reject("No refresh token");
         }
-        return fetch(`${BASE_URL}/refresh`, {
+        return fetch(`${BASE_URL}/auth/refresh`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

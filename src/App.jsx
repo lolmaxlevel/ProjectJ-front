@@ -2,6 +2,7 @@ import {lazy, Suspense} from "react";
 import {Route, Routes} from "react-router-dom";
 import "./assets/styles/global.module.css";
 import PrivateRoute from "./router/PrivateRouter.jsx";
+import ClassPage from "./components/pages/class_page/ClassPage.jsx";
 
 const AchievementsPage = lazy(() => import("./components/pages/achievements/AchievementsPage.jsx"));
 const SchoolPage = lazy(() => import("./components/pages/school/SchoolPage.jsx"));
@@ -20,6 +21,7 @@ function App() {
             <Route path="/admin" element={<PrivateRoute><AdminPage/></PrivateRoute>}/>
             <Route path="/achievements" element={<Suspense><AchievementsPage/></Suspense>}/>
             <Route path="/school" element={<Suspense><SchoolPage/></Suspense>}/>
+            <Route path={"/class/:classId"} element={<Suspense><ClassPage/></Suspense>}/>
         </Routes>
     )
 }

@@ -23,7 +23,7 @@ function CardsBlock() {
                 </h1>
             </div>
             <div className={styles.cardGrid}>
-                {classNumbers .map((item, index) => {
+                {classNumbers.map((item, index) => {
                     return <ClassCard key={index}
                                       title={item}
                                       description={`ну ето описание ${item} класса`}

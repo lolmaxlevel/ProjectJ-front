@@ -1,5 +1,4 @@
 import styles from './first_block.module.css'
-import '/hat.svg'
 import {useAnimate, useInView} from "framer-motion";
 import {useEffect} from "react";
 import {animate} from "framer-motion"
